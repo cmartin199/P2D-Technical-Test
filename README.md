@@ -1,4 +1,7 @@
 # README #
+
+## node version
+vite 7.0.0 requires node 22 or later to run - https://github.com/vitejs/vite/issues/20287
 ## Install Dependencies 
 ```bash
 npm install
@@ -32,7 +35,7 @@ You will be expected to send us this repository at the end of the test as well
 as demonstrate your work through a live walk through.
 
 ### Task
-Using OOP and Design Patterns, complete the following the tasks.
+Using OOP and Design Patterns, complete the following tasks.
 
 - Create two new Appliance Units - a Washing Machine and a Fridge.
 - These new units should draw on the canvas.

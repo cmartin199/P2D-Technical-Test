@@ -13,7 +13,7 @@ export class Sprite {
     }
 
     public draw(context: CanvasRenderingContext2D): void {
-        console.log(this);
+        //console.log(this);
 
         const { width, depth } = this.dimensions;
         const { x, z } = this.position;

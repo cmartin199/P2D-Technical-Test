@@ -1,13 +1,27 @@
 import { Renderer } from './Renderer';
 import { Shape } from '../Base';
 import { DATA } from '../../constants/data';
+import { Fridge, FridgeInterface, WashingMachine, WashingMachineInterface } from '../appliance';
+import { ApplianceType } from '../../constants/types';
 
 export class Game {
     private renderer: Renderer;
-    private shapes: Shape[] = [
-        ...DATA.map(({type, dimensions, position, colour}) => {
-            return new Shape(type, dimensions, position, colour)
-        })
+    private shapes = [
+        ...DATA.map((data) => {
+            switch (data?.applianceType)
+            {
+                case (ApplianceType.WASHER): {
+                    return new WashingMachine(data as WashingMachineInterface)
+
+                }
+                case (ApplianceType.FRIDGE): {
+                    return new Fridge(data as FridgeInterface)
+                }
+                case (undefined): {
+                    return new Shape(data)
+                }
+            }
+        }),
     ];
 
     public init(): void {

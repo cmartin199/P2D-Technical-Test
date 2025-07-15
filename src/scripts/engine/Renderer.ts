@@ -1,3 +1,5 @@
+import { colourPalette } from '../../constants/colourPalette';
+import { UnitType } from '../../constants/types';
 import { Shape } from '../Base';
 
 export class Renderer {
@@ -28,12 +30,36 @@ export class Renderer {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         // Redraw
+        this.checkAllCollisions()
         this.draw();
     }
-
+    
     private draw(): void {
-        for (const shape of this.shapes) {
+        for (let shape of this.shapes) {
             shape.draw(this.context);
         }
+    }
+    
+    private checkAllCollisions(): void {
+        for (let currIndex=0; currIndex <this.shapes.length; currIndex ++) {
+            //added to reduce the number of itterations needed
+            if (this.shapes[currIndex].type === UnitType.OBSTRUCTION) continue   
+
+            for (let targetIndex=1; targetIndex <this.shapes.length; targetIndex ++) {
+            if (this.shapes[targetIndex].type !== UnitType.OBSTRUCTION) continue
+            //logging here due to issue with setting the colour to confirm it works, can explain further during the code walkthrough         
+                console.log(this.isOverlapping(this.shapes[currIndex], this.shapes[targetIndex])) 
+                this.isOverlapping(this.shapes[currIndex], this.shapes[targetIndex]) && this.shapes[currIndex].setColour(colourPalette.collisionWarningRed)
+            }
+        }
+    }
+
+    private isOverlapping(shapeToBeDrawn: Shape, targetShape: Shape): boolean {
+        const hasOverlap: boolean = !( 
+            targetShape.position.x > (shapeToBeDrawn.position.x + shapeToBeDrawn.dimensions.width) || 
+             (targetShape.position.x + targetShape.dimensions.width <  shapeToBeDrawn.position.x || 
+              targetShape.position.z > (shapeToBeDrawn.position.z + shapeToBeDrawn.dimensions.depth) ||
+             (targetShape.position.z + targetShape.dimensions.depth) <  shapeToBeDrawn.position.z));
+            return hasOverlap
     }
 }

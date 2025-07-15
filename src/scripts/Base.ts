@@ -1,15 +1,27 @@
 import { Dimensions, Position, UnitType } from '../constants/types';
 import { Sprite } from './Sprite';
 
-export class Shape {
+export interface ShapeInterface {
+    type: UnitType;
+    position: Position;
+    dimensions: Dimensions;
+    colour: string;
+}
+export class Shape implements ShapeInterface {
+    type: UnitType;
+    position: Position;
+    dimensions: Dimensions;
+    colour: string;
+
     private sprite: Sprite;
 
-    constructor(
-        private type: UnitType,
-        private dimensions: Dimensions,
-        private position: Position,
-        private colour: string,
+    constructor( config: ShapeInterface
     ) {
+        this.type = config.type;
+        this.position = config.position;
+        this.dimensions = config.dimensions;
+        this.colour = config.colour;
+       
         this.sprite = new Sprite(this);
     }
 
