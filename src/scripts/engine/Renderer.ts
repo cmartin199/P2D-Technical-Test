@@ -42,13 +42,10 @@ export class Renderer {
     
     private checkAllCollisions(): void {
         for (let currIndex=0; currIndex <this.shapes.length; currIndex ++) {
-            //added to reduce the number of itterations needed
             if (this.shapes[currIndex].type === UnitType.OBSTRUCTION) continue   
 
             for (let targetIndex=1; targetIndex <this.shapes.length; targetIndex ++) {
             if (this.shapes[targetIndex].type !== UnitType.OBSTRUCTION) continue
-            //logging here due to issue with setting the colour to confirm it works, can explain further during the code walkthrough         
-                console.log(this.isOverlapping(this.shapes[currIndex], this.shapes[targetIndex])) 
                 this.isOverlapping(this.shapes[currIndex], this.shapes[targetIndex]) && this.shapes[currIndex].setColour(colourPalette.collisionWarningRed)
             }
         }

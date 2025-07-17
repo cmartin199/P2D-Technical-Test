@@ -1,4 +1,3 @@
-import { WashingMachine } from "../scripts/appliance";
 
 export enum UnitType {
     BASE = 'Base',

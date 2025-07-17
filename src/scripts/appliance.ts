@@ -8,21 +8,20 @@ export interface ApplianceInterface extends ShapeInterface {
 
 export class Appliance extends Shape implements ApplianceInterface {
     applianceType: ApplianceType;
-
+    
     constructor(appliance: ApplianceInterface) {
+        super(appliance);
+        this.applianceType = appliance.applianceType
+
+        this.init();
+    }
+
+    private init() {            
         const overriddenColourMap = {
             [ApplianceType.WASHER]: colourPalette.units.appliances.washingMachine,
             [ApplianceType.FRIDGE]: colourPalette.units.appliances.fridge
         };
-
-        const modifiedConfig: ApplianceInterface = {
-            ...appliance,
-            colour: overriddenColourMap[appliance.applianceType] || appliance.colour
-        };
-        
-        super(modifiedConfig);
-        this.applianceType = appliance.applianceType
-
+        super.setColour(overriddenColourMap[this.applianceType] || this.colour);
     }
 }
 

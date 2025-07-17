@@ -31,6 +31,7 @@ export class Shape implements ShapeInterface {
 
     public setPosition(position: Position): void {
         this.position = position;
+        this.sprite = new Sprite(this)
     }
 
     public getType(): UnitType {
@@ -47,6 +48,7 @@ export class Shape implements ShapeInterface {
 
     public setColour(colour: string): void {
         this.colour = colour;
+        this.sprite = new Sprite(this)
     }
 
     public draw(context: CanvasRenderingContext2D): void {
